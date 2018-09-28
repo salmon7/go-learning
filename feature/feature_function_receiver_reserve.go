@@ -14,9 +14,12 @@ func (c *Context) CSRFMiddleware() {
 }
 
 func main() {
-	//router := web.New(Context{}).Middleware((*Context).CSRFMiddleware)
 	xx :=(*Context).CSRFMiddleware
 	c := Context{}
 	xx(&c)
 
 }
+/*
+from https://blog.questionable.services/article/map-string-interface/#context-structs
+受到例子的启发，能够传递方法
+*/
