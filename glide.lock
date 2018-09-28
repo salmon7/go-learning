@@ -1,0 +1,10 @@
+hash: af05e69ebf28d1482eb9698977733f9e664d3f7ec01aea63dcf930c9a9833233
+updated: 2018-09-28T20:40:50.506247285+08:00
+imports:
+- name: github.com/goji/httpauth
+  version: 2da839ab0f4df05a6db5eb277995589dadbd4fb9
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/mux
+  version: e3702bed27f0d39777b0b37b664b6280e8ef8fbf
+testImports: []
