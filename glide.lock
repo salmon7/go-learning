@@ -1,5 +1,5 @@
 hash: af05e69ebf28d1482eb9698977733f9e664d3f7ec01aea63dcf930c9a9833233
-updated: 2018-09-28T20:40:50.506247285+08:00
+updated: 2019-02-01T18:01:10.529933369+08:00
 imports:
 - name: github.com/goji/httpauth
   version: 2da839ab0f4df05a6db5eb277995589dadbd4fb9
