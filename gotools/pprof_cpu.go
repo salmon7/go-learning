@@ -13,7 +13,10 @@ func main() {
 		fmt.Printf("os.Creat err: %v\n", err)
 		os.Exit(-1)
 	}
+	defer f.Close()
+
 	pprof.StartCPUProfile(f)
+	defer pprof.StopCPUProfile()
 
 	for i := 0; i < 10000000; i++ {
 		Person := struct {
@@ -25,16 +28,17 @@ func main() {
 		}
 		_, err := json.Marshal(Person)
 		if err != nil {
-			fmt.Println("json.Marshal err: %v\n", err)
+			fmt.Printf("json.Marshal err: %v\n", err)
 			continue
 		}
 		//fmt.Printf("%s\n", jdata)
 	}
 
-	defer pprof.StopCPUProfile()
 }
 
 /*
+zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ go build gotools/pprof_cpu.go
+zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ ./pprof_cpu
 zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ go tool pprof pprof_cpu cpu_profile.pf
 File: pprof_1
 Type: cpu
@@ -69,14 +73,33 @@ Showing top 20 nodes out of 83
 
 如何查看数据：
 第一列表示该函数(不包括子函数)的CPU运行时间
-第二列表示该函数(不包括子函数)的CPU运行时间占CPU百分比，如第一行约等于 510/7240=7.04%
+第二列表示该函数(不包括子函数)的CPU运行时间占CPU百分比，如第一行约等于 510/6820=7.48%
 第三列表示从上往下所有函数累加使用CPU的比例，与具体函数没有关系，sumN = flatN + sum(N-1)
 第四列表示该函数及其子函数的CPU运行时间
 第五列表示该函数及其子函数的CPU运行时间占CPU百分比
 第六列表示函数的名字
 
+输入web命令查看函数调用图
+zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ web
+
+安装go-torch(go-torch 也能从本地生成火焰图，不一定要访问url)
+go get github.com/uber/go-torch
+
+在项目根目录运行
+git clone https://github.com/brendangregg/FlameGraph.git
+
+zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ go-torch ./pprof_cpu cpu_profile.pf -f cpu_profile.svg
+
 参考：
 https://cizixs.com/2017/09/11/profiling-golang-program/
 https://www.reddit.com/r/golang/comments/7ony5f/what_is_the_meaning_of_flat_and_cum_in_golang/
 
+pprof
+https://github.com/google/pprof/blob/master/doc/README.md
+
+Profiling Go Programs
+https://blog.golang.org/profiling-go-programs
+
+graphviz
+https://graphviz.gitlab.io/about/
  */
