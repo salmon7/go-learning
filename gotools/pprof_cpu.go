@@ -79,9 +79,11 @@ Showing top 20 nodes out of 83
 第五列表示该函数及其子函数的CPU运行时间占CPU百分比
 第六列表示函数的名字
 
-输入web命令查看函数调用图
-zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ web
+1.在pprof交互命令行中，输入web命令查看函数调用图
+(pprof) web
 
+2.生成火焰图
+2.1 使用go-torch时候生成火焰图
 安装go-torch(go-torch 也能从本地生成火焰图，不一定要访问url)
 go get github.com/uber/go-torch
 
@@ -89,6 +91,18 @@ go get github.com/uber/go-torch
 git clone https://github.com/brendangregg/FlameGraph.git
 
 zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ go-torch ./pprof_cpu cpu_profile.pf -f cpu_profile.svg
+
+2.2 使用go tool pprof -http=":8081"启动web客户端，从web客户端中查看火焰图以及函数调用图，top，list等，其中火焰图需要go 1.11以上版本
+# This will listen on :8081 and open a browser.
+# Change :8081 to a port of your choice.
+go tool pprof -http=":8081" ./pprof_cpu cpu_profile.pf
+
+2.3 直接使用pprof
+# Get the pprof tool directly
+$ go get -u github.com/google/pprof
+
+$ pprof -http=":8081" ./pprof_cpu cpu_profile.pf
+
 
 参考：
 https://cizixs.com/2017/09/11/profiling-golang-program/

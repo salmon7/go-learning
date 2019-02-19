@@ -38,21 +38,19 @@ func main() {
 }
 
 /*
+
+-inuse_space 默认，内存的使用空间大小
+-inuse_objects 使用的对象数
+-alloc-space 分配的内存空间大小
+-alloc-objects 分配的对象数
+
 zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ go tool pprof pprof_mem ./mem_profile.pf
-
+zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ go tool pprof -inuse_objects pprof_mem ./mem_profile.pf
 zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ go tool pprof -alloc_space pprof_mem ./mem_profile.pf
-
 zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ go tool pprof -alloc_objects pprof_mem ./mem_profile.pf
 
-zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ go tool pprof -inuse_objects pprof_mem ./mem_profile.pf
 
-安装go-torch(go-torch 也能从本地生成火焰图，不一定要访问url)
-go get github.com/uber/go-torch
-
-在项目根目录运行
-git clone https://github.com/brendangregg/FlameGraph.git
-
-zhang@debian-salmon-gb:~/Workspace/go/src/go-learning$ go-torch ./pprof_mem mem_profile.pf -f mem_profile.svg
+火焰图生成方式参见 pprof_cpu.go
 
 参考：
 https://cizixs.com/2017/09/11/profiling-golang-program/
