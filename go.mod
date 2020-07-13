@@ -3,6 +3,7 @@ module github.com/salmon7/go-learning
 go 1.14
 
 require (
+	github.com/apache/thrift v0.13.0
 	github.com/deathowl/go-metrics-prometheus v0.0.0-20181105123824-7cfe975c505b
 	github.com/goji/httpauth v0.0.0-20160601135302-2da839ab0f4d
 	github.com/gorilla/context v1.1.1
